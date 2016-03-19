@@ -13,5 +13,7 @@ route.post('/citations/', citationController.newCitation);
 
 route.put('/citations/:id', citationController.updateCitation);
 
+route.delete('/citations/:id', citationController.deleteCitation);
+
 
 module.exports = route;

@@ -58,3 +58,16 @@ exports.updateCitation = (req, res) => {
         });
     });
 };
+
+// Delete Proverb
+exports.deleteCitation = (req, res) => {
+    let id = req.params.id;
+
+    Citation.remove({_id: id}).exec((err, citation) => {
+        if(err) 
+            return res.send(500, {message: err.message});
+        if(!citation)
+            return res.send(404, {message: 'Citation not found'});
+        return res.send(200, citation);
+    });
+};
