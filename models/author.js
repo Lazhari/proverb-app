@@ -1,9 +1,9 @@
 'use strict';
 
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema();
+const Schema = mongoose.Schema;
 
-const ProverbDB = require('../config-db').ProverbDB;
+const proverbDB = require('../config-db').proverbDB;
 
 const AuthorSchema = new Schema({
     first_name: String,
@@ -13,4 +13,4 @@ const AuthorSchema = new Schema({
     about: String
 });
 
-module.exports = ProverbDB.model('Author', AuthorSchema);
+module.exports = proverbDB.model('Author', AuthorSchema);
