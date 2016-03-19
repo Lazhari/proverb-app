@@ -55,6 +55,7 @@ app.get('/', (req, res, next) => {
 app.use('/api/v1/', require('./routes/api/citation'));
 
 // API Author
+app.use('/api/v1/', require('./routes/api/author'));
 
 app.listen(port, function(err) {
     if(err) console.error(err);
