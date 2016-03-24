@@ -57,6 +57,8 @@ app.use('/api/v1/', require('./routes/api/citation'));
 // API Author
 app.use('/api/v1/', require('./routes/api/author'));
 
+app.use('/', require('./routes/static'));
+
 app.listen(port, function(err) {
     if(err) console.error(err);
     else console.log(`The magic happen in http://localhost:${port}`);
