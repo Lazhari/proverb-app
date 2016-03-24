@@ -15,5 +15,7 @@ route.put('/citations/:id', citationController.updateCitation);
 
 route.delete('/citations/:id', citationController.deleteCitation);
 
+route.get('/citations-authors', citationController.getCitationAuthors);
+
 
 module.exports = route;

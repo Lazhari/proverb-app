@@ -64,10 +64,19 @@ exports.deleteCitation = (req, res) => {
     let id = req.params.id;
 
     Citation.remove({_id: id}).exec((err, citation) => {
-        if(err) 
+        if(err)
             return res.send(500, {message: err.message});
         if(!citation)
             return res.send(404, {message: 'Citation not found'});
         return res.send(200, citation);
+    });
+};
+
+exports.getCitationAuthors = (req, res) => {
+    Citation.distinct('author', (err, authors) => {
+        if(err) {
+            return res.send(500, {message: err.message});
+        }
+        return res.send(200, authors);
     });
 };
