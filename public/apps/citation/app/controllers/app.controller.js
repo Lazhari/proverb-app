@@ -12,8 +12,12 @@
         $scope.citations = [];
         $scope.authors = [];
         $scope.citationLoading = true;
-
+        $scope.toUpdateCitation = toUpdateCitation;
+        $scope.citationModal = {};
+        $scope.notification = "";
         $scope.createCitation = createCitation;
+        $scope.updateCitation = updateCitation;
+        $scope.deleteCitation = deleteCitation;
 
         init();
 
@@ -46,6 +50,33 @@
             });
         }
 
+
+        function deleteCitation(id) {
+            console.log(id);
+            DataStore.deleteCitation(id)
+            .then(function(citation) {
+                init();
+            })
+            .catch(function(err) {
+                console.error(err);
+            });
+        }
+
+        function toUpdateCitation(citationUp) {
+            $scope.citationModal = citationUp;
+        }
+
+        function updateCitation(citationModal) {
+            console.log("11" + JSON.stringify(citationModal));
+            DataStore.updateCitation(citationModal)
+            .then(function(citation) {
+                console.log("Notif" + JSON.stringify(citation));
+                init();
+            })
+            .catch(function(err) {
+                console.error(err);
+            });
+        }
 
         function createCitation() {
 
