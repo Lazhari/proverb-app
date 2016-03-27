@@ -47,15 +47,20 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-md-2">
+                  <a href="#" class="btn btn-md btn-success" ng-click="modalType(0); citationModal={}" data-toggle="modal" data-target="#myModal" style="float: right;">
+                    New quote
+                  </a>
+                </div>
             </div>
             <div class="row">
                 <div class="col-md-10 col-md-offset-1" ng-repeat="citation in citations | filter: search" ng-if="!citationLoading">
                     <div class="row" style="background-color: rgba(0, 0, 0, 0.02);">
-                        <a href="#" class="btn btn-xs btn-default" ng-click="deleteCitation(citation._id)" style="float: right;">
-                            <span class="glyphicon glyphicon-remove-circle">
+                        <a href="#" class="btn btn-xs btn-danger" ng-click="deleteCitation(citation._id)" style="float: right;">
+                            <span class="glyphicon glyphicon-remove">
                             </span>
                         </a>
-                        <a href="#" ng-click="toUpdateCitation(citation)" data-toggle="modal" data-target="#myModal" class="btn btn-xs btn-default" style="float: right;">
+                        <a href="#" ng-click="modalType(1); toUpdateCitation(citation)" data-toggle="modal" data-target="#myModal" class="btn btn-xs btn-warning" style="float: right;">
                             <span class="glyphicon glyphicon-edit">
                             </span>
                         </a>
@@ -81,27 +86,34 @@
         </div>
         <!-- Modal -->
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-          <div class="container">
-            <div class="row">
-              <div class="col-sm-6 col-sm-offset-3 text-center">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  ×
-                </button>
-                <br><br>
-                <div class="form-group">
-                  <textarea id="quote" class="form-control" rows="3" ng-model="citationModal.quote">
-                  </textarea>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3 text-center">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          ×
+                        </button>
+                        <br><br>
+                        <div class="form-group">
+                          <textarea id="quote" class="form-control" rows="3" ng-model="citationModal.quote">
+                          </textarea>
+                        </div>
+                        <div class="form-group">
+                          <input type="text" class="form-control" id="author" ng-model="citationModal.author">
+                        </div>
+                        <hr>
+                        <div class="form-group" ng-show="modalTyper">
+                            <button ng-click="newCitation(citationModal)" type="submit" class="btn btn-success btn-lg" data-dismiss="modal">
+                                Add
+                            </button>
+                        </div>
+                        <div class="form-group" ng-show="!modalTyper">
+                            <button ng-click="updateCitation(citationModal)" type="submit" class="btn btn-warning btn-lg" data-dismiss="modal">
+                                Edit
+                            </button>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                  <input type="text" class="form-control" id="author" ng-model="citationModal.author">
-                </div>
-                <hr>
-                <div class="form-group">
-                    <button ng-click="updateCitation(citationModal)" type="submit" class="btn btn-warning btn-lg" data-dismiss="modal">Edit</button>
-                </div>
-              </div>
             </div>
-          </div>
         </div>
 
         <script src="/vendor/jquery/dist/jquery.min.js" charset="utf-8"></script>

@@ -13,7 +13,8 @@
             getCitations: getCitations,
             getCitationsAuthors: getCitationsAuthors,
             deleteCitation: deleteCitation,
-            updateCitation: updateCitation
+            updateCitation: updateCitation,
+            newCitation: newCitation
         };
 
         return services;
@@ -43,6 +44,18 @@
                   deferred.reject(error);
               });
               return deferred.promise;
+        }
+
+        function newCitation(newCitationObject) {
+          var deferred = $q.defer();
+          $http.post('/api/v1/citations/', newCitationObject)
+          .success(function(resp, status) {
+            deferred.resolve(resp);
+          })
+          .error(function(error, status) {
+            deferred.reject(error);
+          });
+          return deferred.promise;
         }
 
         function deleteCitation(id) {

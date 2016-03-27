@@ -15,7 +15,8 @@
         $scope.toUpdateCitation = toUpdateCitation;
         $scope.citationModal = {};
         $scope.notification = "";
-        $scope.createCitation = createCitation;
+        $scope.modalType = modalType;
+        $scope.newCitation = newCitation;
         $scope.updateCitation = updateCitation;
         $scope.deleteCitation = deleteCitation;
 
@@ -28,6 +29,12 @@
             });
         }
 
+        function modalType(index) {
+            if(index == 0)
+                $scope.modalTyper = true;
+            else
+                $scope.modalTyper = false;
+        }
 
         function getCitations() {
             DataStore.getCitations()
@@ -63,6 +70,9 @@
         }
 
         function toUpdateCitation(citationUp) {
+            console.log("toUpdateCitation");
+            
+            console.log($scope.modalTyper);
             $scope.citationModal = citationUp;
         }
 
@@ -71,6 +81,7 @@
             DataStore.updateCitation(citationModal)
             .then(function(citation) {
                 console.log("Notif" + JSON.stringify(citation));
+                $scope.citationModal = {};
                 init();
             })
             .catch(function(err) {
@@ -78,8 +89,14 @@
             });
         }
 
-        function createCitation() {
-
+        function newCitation(newCitationObject) {
+            DataStore.newCitation(newCitationObject)
+            .then(function(citation) {
+                init();
+            })
+            .catch(function(err) {
+                console.error(err);
+            });
         }
     }
 
